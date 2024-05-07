@@ -3,7 +3,7 @@ import * as readline from 'readline';
 namespace cc {
   enum SyntaxKind {
     NumberToken,
-    Whitespace,
+    WhiteSpaceToken,
     PlusToken,
     MinusToken,
     StarToken,
@@ -20,7 +20,7 @@ namespace cc {
     public readonly Text: string;
     public readonly Value: number | null;
 
-    constructor(kind: SyntaxKind, position: number, text: string, value: number | null) {
+    constructor(kind: SyntaxKind, position: number, text: string, value: number | null) { // Initialize the syntax token
       this.Kind = kind;
       this.Position = position;
       this.Text = text;
@@ -32,29 +32,30 @@ namespace cc {
     private readonly _text: string;
     private _position: number;
 
-    constructor(text: string) {
+    constructor(text: string) { // Initialize the lexer
       this._text = text;
       this._position = 0;
     }
 
-    private get Current(): string {
+    private get Current(): string { // Get the current character
       if (this._position >= this._text.length)
         return '\0';
 
       return this._text[this._position];
     }
 
-    private Next(): void {
+    private Next(): void { // Move to the next character
       this._position++;
     }
 
-    public NextToken(): SyntaxToken {
-      while (this._position < this._text.length)
+    public NextToken(): SyntaxToken { // Get the next token
+      while (this._position < this._text.length) // Loop through the text
       {
-        if (this._position >= this._text.length)
+        if (this._position >= this._text.length) // Check if the position is greater than or equal to the text length
           return new SyntaxToken(SyntaxKind.EndOfFileToken, this._position, "\0", null);
 
-        if (/\d/.test(this.Current))
+
+        if (/\d/.test(this.Current)) // // Check for numbers using regex
         {
           const start = this._position;
 
@@ -68,7 +69,8 @@ namespace cc {
           return new SyntaxToken(SyntaxKind.NumberToken, start, text, value);
         }
 
-        if (/\s/.test(this.Current))
+
+        if (/\s/.test(this.Current)) // // Check for whitespace using regex
         {
           const start = this._position;
 
@@ -78,10 +80,10 @@ namespace cc {
           const length = this._position - start;
           const text = this._text.substring(start, start + length);
 
-          return new SyntaxToken(SyntaxKind.Whitespace, start, text, null);
+          return new SyntaxToken(SyntaxKind.WhiteSpaceToken, start, text, null);
         }
 
-        switch (this.Current)
+        switch (this.Current) // Check for operators
         {
           case '+':
             return new SyntaxToken(SyntaxKind.PlusToken, this._position++, "+", null);
