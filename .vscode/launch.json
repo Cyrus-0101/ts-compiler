@@ -1,0 +1,26 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Node.js: Launch Program (console)",
+      "type": "node",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/dist/Program.js",
+      "args": [],
+      "cwd": "${workspaceFolder}/cc", // Working directory defaults to the workspace
+      "console": "externalTerminal", // Use the external terminal
+      "stopOnEntry": false,
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "name": "Node.js: Attach to Process",
+      "type": "node",
+      "request": "attach",
+      "processId": "${command:pickProcess}" // Attach to a running Node.js process
+    }
+  ]
+}

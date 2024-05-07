@@ -1,0 +1,20 @@
+{
+  "name": "mini-js",
+  "version": "1.0.0",
+  "description": "This is a small compiler",
+  "main": "Program.ts",
+  "type": "module",
+  "dependencies": {
+    "undici-types": "^5.26.5"
+  },
+  "scripts": {
+    "dev": "tsc -p tsconfig.json && node dist/Program.js",
+    "test": ""
+  },
+  "author": "Cyrus N.",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.12.10",
+    "typescript": "^5.4.5"
+  }
+}
